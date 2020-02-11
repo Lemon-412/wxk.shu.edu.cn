@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculate</title>
+</head>
+<body>
+
+<h1>加法计算器</h1>
+
+————用于测试请求
+<br>
+<br>
+<br>
+
+<form method="POST" action="/calculate/">
+    {% csrf_token %}
+    <input type="number" name="value_A" value={{a}}>
+    +
+    <input type="number" name="value_B" value={{b}}>
+    <input type="submit" value=" = ">
+    {{c}}
+</form>
+<br>
+
+<a href="/">返回首页</a>
+<br>
+
+</body>
+</html>

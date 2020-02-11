@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>calculator list</title>
+</head>
+<body>
+
+<h1>计算历史</h1>
+
+————用于测试Mysql
+<br>
+<br>
+<br>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>A</th>
+        <th>B</th>
+        <th>A+B</th>
+    </tr>
+    </thead>
+    {% for e in data %}
+    <tr>
+        <td>{{e.value_A}}</td>
+        <td>{{e.value_B}}</td>
+        <td>{{e.value_C}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+
+<a href="/">返回首页</a>
+<br>
+
+</body>
+</html>
