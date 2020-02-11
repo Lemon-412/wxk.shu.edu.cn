@@ -18,8 +18,14 @@ from django.urls import path
 from myWEB import views
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.home),
     path('admin/', admin.site.urls),
     path('calculate/', views.calculate),
-    path('calculate-history/', views.calculate_history)
+    path('calculate-history/', views.calculate_history),
+
+    path('login', views.login),
+    path('login_view/', views.login_view),  # 填写完信息后提交登陆验证
+    path('logout_view/', views.logout_view),  # 退出登陆
+
+    path('index', views.index),
 ]

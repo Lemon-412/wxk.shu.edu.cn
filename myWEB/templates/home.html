@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1 style="color: blue"> 上海大学统一身份认证 </h1>
+    <br>
+
+    {% if request.user.username %}
+    <h3> 欢迎 {{ request.user.username }} ！</h3>
+    <br>
+    <a href="/logout_view" style="color: red">安全退出</a>
+    <br>
+
+    {% else %}
+    <h3> 登录 </h3>
+    <br>
+
+    <form role="form" action="/login_view/" method="post">
+        {% csrf_token %}
+        <input name="username" type="text" autofocus>
+        <br>
+        <input name="password" type="password" value="">
+        <br>
+        <div class="form-group" style="color: red">{{ msg }}</div>
+        <br>
+        <button>登录</button>
+    </form>
+    <br>
+    {% endif %}
+
+    <br>
+    <br>
+    验证性实验:
+    <br>
+    <br>
+    <a href="/calculate">加法计算器</a>
+    <br>
+    <a href="/calculate-history">计算历史</a>
+    <br>
+
+</body>
+</html>
