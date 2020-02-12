@@ -1,45 +1,79 @@
 <!DOCTYPE html>
+
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>伪上海大学统一身份认证</title>
+    <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
-<body>
-    <h1 style="color: blue"> 上海大学统一身份认证 </h1>
+<body background="https://oauth.shu.edu.cn/images/login-bg.jpg">
+    <center style="color:white; background:#255085"><font size="6">伪上海大学统一身份认证</font></center>
+    <br>
+    <br>
+    <br>
     <br>
 
-    {% if request.user.username %}
-    <h3> 欢迎 {{ request.user.username }} ！</h3>
-    <br>
-    <a href="/logout_view" style="color: red">安全退出</a>
-    <br>
+    <div class="container" style="background: #FFFFFF; opacity:0.9;">
+        <div class="col-md-4 col-md-offset-4">
+            {% if request.user.username %}
+            <h3> 欢迎 {{ request.user.username }} ！</h3>
+            <br>
+            <br>
+            <br>
+            <a href="/logout_view" style="color: red">安全退出</a>
+            <br>
+            <br>
+            <br>
+            <br>
 
-    {% else %}
-    <h3> 登录 </h3>
-    <br>
+            {% else %}
+            <h3> 登录 </h3>
+            <br>
 
-    <form role="form" action="/login_view/" method="post">
-        {% csrf_token %}
-        <input name="username" type="text" autofocus>
-        <br>
-        <input name="password" type="password" value="">
-        <br>
-        <div class="form-group" style="color: red">{{ msg }}</div>
-        <br>
-        <button>登录</button>
-    </form>
-    <br>
-    {% endif %}
-
-    <br>
-    <br>
-    验证性实验:
+            <form role="form" action="/login_view/" method="post">
+                {% csrf_token %}
+                <input name="username" type="text" autofocus>
+                <br>
+                <input name="password" type="password" value="">
+                <br>
+                <div class="form-group" style="color: red">{{ msg }}</div>
+                <br>
+                <button>登录</button>
+            </form>
+            <br>
+            {% endif %}
+        </div>
+    </div>
     <br>
     <br>
-    <a href="/calculate">加法计算器</a>
     <br>
-    <a href="/calculate-history">计算历史</a>
     <br>
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <center style="color:white; background:#255085"><font size="4" color=":#255085">.</font></center>
+    <center style="color:white; background:#255085"><font size="4">地址：上海市宝山区上大路99号 邮编：200444 信息服务电话：66133370 技术支持 上海大学信息化工作办公室</font></center>
+    <center style="color:white; background:#255085"><font size="4">Copyright © 2012-2020 Shanghai University, All Rights Reserved</font></center>
+    <center style="color:white; background:#255085"><font size="4" color=":#255085">.</font></center>
 </body>
 </html>

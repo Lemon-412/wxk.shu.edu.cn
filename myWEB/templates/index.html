@@ -5,72 +5,93 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Index</title>
+  <title>首页</title>
   <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+  <style type="text/css">
+    body{background: #FFFFFF}
+    #blue{background: #69B2E6}
+    #white{background: #FFFFFF}
+  </style>
 </head>
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Brand</a>
+  <div class="row">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header" style="min-height: 70px;">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="" style="padding: 25px 50px">上海大学网络选课系统</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <!--<li class="active"><a href=""> 首页 <span class="sr-only">(current)</span></a></li>-->
+            <li><a href="index" style="padding: 25px 15px"> 首页 </a></li>
+          </ul>
+          <p class="navbar-text navbar-right" style="padding: 10px 150px">
+            <font color="red">2019-2020学年冬季学期</font> |
+            <font color="black"> 欢迎 {{request.user.username}}  @S1</font> |
+            <a href="/logout_view" class="navbar-link" style="color: #2866BD">安全退出</a>
+          </p>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar" style="background:#69B2E6; min-height:800px; padding:1px 5px 0px 2px;">
+        <br>
+
+        <ul class="nav nav-sidebar" style="background: #AFD2FC;">
+          <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 学生信息 </font></p>
+        </ul>
+        <ul class="nav nav-sidebar" style="background: #FFFFFF">
+          <font size="4">
+            <p style="padding: 5px 5px; line-height:28px;">
+              学号：17122490
+              <br>
+              姓名：秦敏浩
+              <br>
+              英语等级：Z
+              <br>
+              上学期平均绩点：0.00
+              <br>
+              <font color="red"><b>完成选课后请点击 <a href="/logout_view" style="color:red">[安全退出]</a></b></font>
+            </p>
+          </font>
+        </ul>
+        <br>
+
+        <ul class="nav nav-sidebar" style="background: #AFD2FC">
+          <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 常用功能 </font></p>
+        </ul>
+        <ul class="nav nav-sidebar" style="background: #FFFFFF">
+          <li><a href="index/xk/"><font size="4" style="color: #385090; padding:30px;"> 选课 </font></a></li>
+          <li><a href="index/tk/"><font size="4" style="color: #385090; padding:30px;"> 退课 </font></a></li>
+        </ul>
+        <br>
+
+        <ul class="nav nav-sidebar" style="background: #AFD2FC">
+          <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 数据查询 </font></p>
+        </ul>
+        <ul class="nav nav-sidebar" style="background: #FFFFFF">
+          <li><a href="index/kbcx/"><font size="4" style="color: #385090; padding:30px;"> 课表查询 </font></a></li>
+          <li><a href="index/kccx/"><font size="4" style="color: #385090; padding:30px;"> 课程查询 </font></a></li>
+        </ul>
+        <br>
+
       </div>
+      hello world!!
+    </div>
+  </div>
 
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-          <li><a href="#">Link</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">One more separated link</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="navbar-form navbar-left">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Link</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-
-  <h1>选课首页</h1>
-  <br>
-
-  <a href="/">返回首页</a>
-  <br>
-  <a href="/logout_view" style="color: red">安全退出</a>
-  <br>
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
