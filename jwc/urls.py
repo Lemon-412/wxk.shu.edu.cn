@@ -28,4 +28,8 @@ urlpatterns = [
     path('logout_view/', views.logout_view),  # 退出登陆
 
     path('index', views.index),
+    path('index/xk/', views.xk),
+    path('index/tk/', views.tk),
+    path('index/kbcx/', views.kbcx),
+    path('index/kccx/', views.kccx),
 ]

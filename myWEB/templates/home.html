@@ -7,8 +7,11 @@
     <meta charset="UTF-8">
     <title>伪上海大学统一身份认证</title>
     <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <style type="text/css">
+    body{background: url('https://oauth.shu.edu.cn/images/login-bg.jpg') no-repeat fixed center left / cover;}
+  </style>
 </head>
-<body background="https://oauth.shu.edu.cn/images/login-bg.jpg">
+<body>
     <center style="color:white; background:#255085"><font size="6">伪上海大学统一身份认证</font></center>
     <br>
     <br>
@@ -75,5 +78,9 @@
     <center style="color:white; background:#255085"><font size="4">地址：上海市宝山区上大路99号 邮编：200444 信息服务电话：66133370 技术支持 上海大学信息化工作办公室</font></center>
     <center style="color:white; background:#255085"><font size="4">Copyright © 2012-2020 Shanghai University, All Rights Reserved</font></center>
     <center style="color:white; background:#255085"><font size="4" color=":#255085">.</font></center>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
 </body>
 </html>
