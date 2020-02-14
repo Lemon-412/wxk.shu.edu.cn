@@ -76,23 +76,27 @@ def xk(request):  # 学生选课
     status, context = get_user_info(request)
     if status != 'student':
         return HttpResponseRedirect("/")
-    result = ClassTable.objects.filter(xq='2019-2020学年冬季学期')
-    classtable = []
-    for kc in result:
-        classtable.append(
-            {'kh': kc.kh, 'km': kc.km, 'gh': kc.gh.gh, 'xm': kc.gh.xm, 'sksj': kc.sksj}
-        )
-    context['classtable'] = classtable
     if request.method == 'GET':  # 首次访问
+        result = ScoreTable.objects.filter(xq='2019-2020学年冬季学期', xh=request.user.username)
+        classtable = []
+        for kc in result:
+            classtable.append(
+                {
+                    'kh': kc.kh.kh, 'gh': kc.gh.gh, 'xm': kc.gh.xm,
+                    'km': ClassTable.objects.filter(kh=kc.kh.kh, gh=kc.gh.gh, xq='2019-2020学年冬季学期')[0].km,
+                    'sksj': ClassTable.objects.filter(kh=kc.kh.kh, gh=kc.gh.gh, xq='2019-2020学年冬季学期')[0].sksj,
+                }
+            )
+        context['classtable'] = classtable
         return render(request, 'xk.html', context=context)
     elif request.method == 'POST':  # 填表选课
         for i in range(1, 5):
-            kh = context['kh'+str(i)] = request.POST['kh'+str(i)]
-            gh = context['gh'+str(i)] = request.POST['gh'+str(i)]
+            kh = context['kh' + str(i)] = request.POST['kh' + str(i)]
+            gh = context['gh' + str(i)] = request.POST['gh' + str(i)]
             if len(kh) and len(gh):
                 result = ClassTable.objects.filter(xq='2019-2020学年冬季学期', kh=kh, gh=gh)
                 if not result.exists():
-                    context['result'+str(i)] = '选课失败：不存在该课程'
+                    context['result' + str(i)] = '选课失败：不存在该课程'
                     continue
                 result = ScoreTable.objects.filter(
                     xh=request.user.username,
@@ -100,7 +104,7 @@ def xk(request):  # 学生选课
                     kh=ClassTable.objects.filter(xq='2019-2020学年冬季学期', kh=kh)[0]
                 )
                 if result.exists():
-                    context['result'+str(i)] = '选课失败：已选同类型课程'
+                    context['result' + str(i)] = '选课失败：已选同类型课程'
                     continue
                 item = ScoreTable(
                     xq='2019-2020学年冬季学期',
@@ -109,9 +113,20 @@ def xk(request):  # 学生选课
                     xh=StudentTable.objects.filter(xh=request.user.username)[0]
                 )
                 item.save()
-                context['result'+str(i)] = '选课成功'
+                context['result' + str(i)] = '选课成功'
             elif len(kh) or len(gh):
-                context['result'+str(i)] = '选课失败：课程号或工号未填写完整'
+                context['result' + str(i)] = '选课失败：课程号或工号未填写完整'
+            result = ScoreTable.objects.filter(xq='2019-2020学年冬季学期', xh=request.user.username)
+            classtable = []
+            for kc in result:
+                classtable.append(
+                    {
+                        'kh': kc.kh.kh, 'gh': kc.gh.gh, 'xm': kc.gh.xm,
+                        'km': ClassTable.objects.filter(kh=kc.kh.kh, gh=kc.gh.gh, xq='2019-2020学年冬季学期')[0].km,
+                        'sksj': ClassTable.objects.filter(kh=kc.kh.kh, gh=kc.gh.gh, xq='2019-2020学年冬季学期')[0].sksj,
+                    }
+                )
+            context['classtable'] = classtable
         return render(request, 'xk.html', context=context)
     return HttpResponseRedirect("/")
 
@@ -122,7 +137,46 @@ def tk(request):  # 学生退课
     if status != 'student':
         return HttpResponseRedirect("/")
     if request.method == 'GET':
+        result = ScoreTable.objects.filter(xq='2019-2020学年冬季学期', xh=request.user.username)
+        classtable = []
+        for kc in result:
+            classtable.append(
+                {
+                    'kh': kc.kh.kh, 'gh': kc.gh.gh, 'xm': kc.gh.xm,
+                    'km': ClassTable.objects.filter(kh=kc.kh.kh, gh=kc.gh.gh, xq='2019-2020学年冬季学期')[0].km,
+                    'sksj': ClassTable.objects.filter(kh=kc.kh.kh, gh=kc.gh.gh, xq='2019-2020学年冬季学期')[0].sksj,
+                }
+            )
+        context['classtable'] = classtable
         return render(request, 'tk.html', context=context)
+    elif request.method == 'POST':
+        kh = request.POST['kh']
+        gh = request.POST['gh']
+        if len(kh) and len(gh):
+            result = ScoreTable.objects.filter(xh=request.user.username, xq='2019-2020学年冬季学期',
+                                               kh=ClassTable.objects.filter(xq='2019-2020学年冬季学期', kh=kh)[0],
+                                               gh=TeacherTable.objects.filter(gh=gh)[0]
+                                               )
+            if not result.exists():
+                context['result'] = '退课失败：未选此门课程'
+            else:
+                result.delete()
+                context['result'] = '退课成功'
+        elif len(kh) or len(gh):
+            context['result'] = '退课失败：课程号或工号未填写完整'
+        result = ScoreTable.objects.filter(xq='2019-2020学年冬季学期', xh=request.user.username)
+        classtable = []
+        for kc in result:
+            classtable.append(
+                {
+                    'kh': kc.kh.kh, 'gh': kc.gh.gh, 'xm': kc.gh.xm,
+                    'km': ClassTable.objects.filter(kh=kc.kh.kh, gh=kc.gh.gh, xq='2019-2020学年冬季学期')[0].km,
+                    'sksj': ClassTable.objects.filter(kh=kc.kh.kh, gh=kc.gh.gh, xq='2019-2020学年冬季学期')[0].sksj,
+                }
+            )
+        context['classtable'] = classtable
+        return render(request, 'tk.html', context=context)
+    return HttpResponseRedirect("/")
 
 
 @login_required
@@ -130,8 +184,18 @@ def kbcx(request):  # 学生课表查询
     status, context = get_user_info(request)
     if status != 'student':
         return HttpResponseRedirect("/")
-    if request.method == 'GET':
-        return render(request, 'kbcx.html', context=context)
+    result = ScoreTable.objects.filter(xh=request.user.username, xq='2019-2020学年冬季学期')
+    classtable = []
+    for kc in result:
+        classtable.append(
+            {
+                'kh': kc.kh.kh, 'gh': kc.gh.gh, 'xm': kc.gh.xm, 'pscj': kc.pscj, 'kscj': kc.kscj, 'zpcj': kc.zpcj,
+                'km': ClassTable.objects.filter(kh=kc.kh.kh, gh=kc.gh.gh, xq='2019-2020学年冬季学期')[0].km,
+                'sksj': ClassTable.objects.filter(kh=kc.kh.kh, gh=kc.gh.gh, xq='2019-2020学年冬季学期')[0].sksj,
+            }
+        )
+    context['classtable'] = classtable
+    return render(request, 'kbcx.html', context=context)
 
 
 @login_required
@@ -141,3 +205,31 @@ def kccx(request):  # 学生课程查询
         return HttpResponseRedirect("/")
     if request.method == 'GET':
         return render(request, 'kccx.html', context=context)
+    elif request.method == 'POST':
+        result = ClassTable.objects.all()
+        context['xq'] = request.POST['xq']
+        if context['xq']:
+            result = result.filter(xq__contains=context['xq'])
+        context['kh'] = request.POST['kh']
+        if context['kh']:
+            result = result.filter(kh__startswith=context['kh'])
+        context['km'] = request.POST['km']
+        if context['km']:
+            result = result.filter(km__contains=context['km'])
+        context['gh'] = request.POST['gh']
+        if context['gh']:
+            result = result.filter(gh=context['gh'])
+        context['jsmc'] = request.POST['jsmc']
+        if context['jsmc']:
+            result = result.filter(gh__in=TeacherTable.objects.filter(xm__contains=context['jsmc']))
+        context['sksj'] = request.POST['sksj']
+        if context['sksj']:
+            result = result.filter(sksj__contains=context['sksj'])
+        classtable = []
+        for kc in result:
+            classtable.append(
+                {'kh': kc.kh, 'km': kc.km, 'gh': kc.gh.gh, 'jsmc': kc.gh.xm, 'sksj': kc.sksj, 'xq': kc.xq}
+            )
+        context['classtable'] = classtable
+        return render(request, 'kccx.html', context=context)
+    return HttpResponseRedirect("/")

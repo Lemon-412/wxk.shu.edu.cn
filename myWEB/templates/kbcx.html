@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> 课表查询 </title>
+  <title> 成绩查询 </title>
   <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
   <style type="text/css">
   </style>
@@ -29,7 +29,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/index" style="padding: 25px 15px"> 首页 </a></li>
-            <li class="active"><a href="" style="padding: 25px 15px"> 课表查询 <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="" style="padding: 25px 15px"> 成绩查询 <span class="sr-only">(current)</span></a></li>
           </ul>
           <p class="navbar-text navbar-right" style="padding: 10px 150px">
             <font color="red">2019-2020学年冬季学期</font> |
@@ -77,13 +77,63 @@
           <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 数据查询 </font></p>
         </ul>
         <ul class="nav nav-sidebar" style="background: #FFFFFF">
-          <li><a href="/index/kbcx/"><font size="4" style="color: #385090; padding:30px;"> 课表查询 </font></a></li>
+          <li><a href="/index/kbcx/"><font size="4" style="color: #385090; padding:30px;"> 成绩查询 </font></a></li>
           <li><a href="/index/kccx/"><font size="4" style="color: #385090; padding:30px;"> 课程查询 </font></a></li>
         </ul>
         <br>
 
       </div>
-      课表查询
+      <div class="col-sm-3 col-md-6" style="padding: 10px 30px;">
+        <b><font size="4"> 本学期成绩查询结果： </font></b>
+        <table class="table">
+          <thead>
+            <tr>
+                <th> 课程号 </th>
+                <th> 课程名称 </th>
+                <th> 上课时间 </th>
+                <th> 工号 </th>
+                <th> 教师名称 </th>
+                <th> 平时成绩 </th>
+                <th> 考试成绩 </th>
+                <th> 总评成绩 </th>
+                <!--<th> 选课 </th>-->
+            </tr>
+          </thead>
+          <tbody>
+            {% for kc in classtable %}
+            <tr>
+                <td> {{kc.kh}} </td>
+                <td> {{kc.km}} </td>
+                <td> {{kc.sksj}} </td>
+                <td> {{kc.gh}} </td>
+                <td> {{kc.xm}} </td>
+                <td>
+                  {% if kc.pscj %}
+                  {{kc.pscj}}
+                  {% else %}
+                  尚未发布
+                  {% endif %}
+                </td>
+                <td>
+                  {% if kc.kscj %}
+                  {{kc.kscj}}
+                  {% else %}
+                  尚未发布
+                  {% endif %}
+                </td>
+                <td>
+                  {% if kc.zpcj %}
+                  {{kc.zpcj}}
+                  {% else %}
+                  尚未发布
+                  {% endif %}
+                </td>
+                <!--<td><button type="submit"> 选课 </button></td>-->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 

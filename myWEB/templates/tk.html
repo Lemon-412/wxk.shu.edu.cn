@@ -8,6 +8,11 @@
   <title> 退课 </title>
   <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
   <style type="text/css">
+    .form-control-inline {
+      width:200px;
+      height:30px;
+      display:inline;
+    }
   </style>
 </head>
 <body>
@@ -77,13 +82,58 @@
           <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 数据查询 </font></p>
         </ul>
         <ul class="nav nav-sidebar" style="background: #FFFFFF">
-          <li><a href="/index/kbcx/"><font size="4" style="color: #385090; padding:30px;"> 课表查询 </font></a></li>
+          <li><a href="/index/kbcx/"><font size="4" style="color: #385090; padding:30px;"> 成绩查询 </font></a></li>
           <li><a href="/index/kccx/"><font size="4" style="color: #385090; padding:30px;"> 课程查询 </font></a></li>
         </ul>
         <br>
 
       </div>
-      退课
+
+      <div class="col-sm-3 col-md-6" style="padding: 10px 30px;">
+        <b><font size="4"> 退课： </font></b>
+        <br><br>
+        <form method="POST" action="/index/tk/">
+          {% csrf_token %}
+          <div class="form-group">
+            课程号：
+            <input type="text" name="kh" class="form-control form-control-inline">
+            工号：
+            <input type="text" name="gh" class="form-control form-control-inline">
+            <font color="red"><b>{{result}}</b></font>
+          </div>
+          <input type="submit" value="提交">
+          <br>
+        </form>
+        <br><br>
+      </div>
+
+      <div class="col-sm-3 col-md-6" style="padding: 10px 30px;">
+        <b><font size="4"> 已选课程： </font></b>
+        <table class="table">
+          <thead>
+            <tr>
+                <th> 课程号 </th>
+                <th> 课程名称 </th>
+                <th> 工号 </th>
+                <th> 教师名称 </th>
+                <th> 上课时间 </th>
+                <!--<th> 选课 </th>-->
+            </tr>
+          </thead>
+          <tbody>
+            {% for kc in classtable %}
+            <tr>
+                <td> {{kc.kh}} </td>
+                <td> {{kc.km}} </td>
+                <td> {{kc.gh}} </td>
+                <td> {{kc.xm}} </td>
+                <td> {{kc.sksj}} </td>
+                <!--<td><button type="submit"> 选课 </button></td>-->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
