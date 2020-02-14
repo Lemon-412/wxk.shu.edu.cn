@@ -8,9 +8,11 @@
   <title> 选课 </title>
   <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
   <style type="text/css">
-    body{background: #FFFFFF}
-    #blue{background: #69B2E6}
-    #white{background: #FFFFFF}
+    .form-control-inline {
+      width:200px;
+      height:30px;
+      display:inline;
+    }
   </style>
 </head>
 <body>
@@ -55,13 +57,11 @@
         <ul class="nav nav-sidebar" style="background: #FFFFFF">
           <font size="4">
             <p style="padding: 5px 5px; line-height:28px;">
-              学号：17122490
+              学号：{{xh}}
               <br>
-              姓名：秦敏浩
+              姓名：{{xm}}
               <br>
-              英语等级：Z
-              <br>
-              上学期平均绩点：0.00
+              英语等级：{{yydj}}
               <br>
               <font color="red"><b>完成选课后请点击 <a href="/logout_view" style="color:red">[安全退出]</a></b></font>
             </p>
@@ -88,7 +88,74 @@
         <br>
 
       </div>
-      选课
+      <!--选课-->
+      <div class="col-sm-3 col-md-6" style="padding: 10px 30px;">
+        <b><font size="4"> 快捷录入： </font></b>
+        <br><br>
+        <form method="POST" action="/index/xk/">
+          {% csrf_token %}
+          <div class="form-group">
+            课程号1：
+            <input type="text" name="kh1" class="form-control form-control-inline" value={{kh1}}>
+            工号1：
+            <input type="text" name="gh1" class="form-control form-control-inline" value={{gh1}}>
+            <font color="red"><b>{{result1}}</b></font>
+          </div>
+          <div class="form-group">
+            课程号2：
+            <input type="text" name="kh2" class="form-control form-control-inline" value={{kh2}}>
+            工号2：
+            <input type="text" name="gh2" class="form-control form-control-inline" value={{gh2}}>
+            <font color="red"><b>{{result2}}</b></font>
+          </div>
+          <div class="form-group">
+            课程号3：
+            <input type="text" name="kh3" class="form-control form-control-inline" value={{kh3}}>
+            工号3：
+            <input type="text" name="gh3" class="form-control form-control-inline" value={{gh3}}>
+            <font color="red"><b>{{result3}}</b></font>
+          </div>
+          <div class="form-group">
+            课程号4：
+            <input type="text" name="kh4" class="form-control form-control-inline" value={{kh4}}>
+            工号4：
+            <input type="text" name="gh4" class="form-control form-control-inline" value={{gh4}}>
+            <font color="red"><b>{{result4}}</b></font>
+          </div>
+          <input type="submit" value="提交">
+          <br>
+        </form>
+        <br><br>
+      </div>
+      {% if classtable %}
+      <div class="col-sm-3 col-md-6">
+        <table class="table">
+          <thead>
+            <tr>
+                <th> 课程号 </th>
+                <th> 课程名称 </th>
+                <th> 工号 </th>
+                <th> 教师名称 </th>
+                <th> 上课时间 </th>
+                <!--<th> 选课 </th>-->
+            </tr>
+          </thead>
+          <tbody>
+            {% for kc in classtable %}
+            <tr>
+                <td> {{kc.kh}} </td>
+                <td> {{kc.km}} </td>
+                <td> {{kc.gh}} </td>
+                <td> {{kc.xm}} </td>
+                <td> {{kc.sksj}} </td>
+                <!--<td><button type="submit"> 选课 </button></td>-->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% endif %}
+
     </div>
   </div>
 

@@ -8,9 +8,6 @@
   <title> 课表查询 </title>
   <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
   <style type="text/css">
-    body{background: #FFFFFF}
-    #blue{background: #69B2E6}
-    #white{background: #FFFFFF}
   </style>
 </head>
 <body>
@@ -55,13 +52,11 @@
         <ul class="nav nav-sidebar" style="background: #FFFFFF">
           <font size="4">
             <p style="padding: 5px 5px; line-height:28px;">
-              学号：17122490
+              学号：{{xh}}
               <br>
-              姓名：秦敏浩
+              姓名：{{xm}}
               <br>
-              英语等级：Z
-              <br>
-              上学期平均绩点：0.00
+              英语等级：{{yydj}}
               <br>
               <font color="red"><b>完成选课后请点击 <a href="/logout_view" style="color:red">[安全退出]</a></b></font>
             </p>

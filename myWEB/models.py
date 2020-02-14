@@ -42,6 +42,6 @@ class ScoreTable(models.Model):  # 选课表
     xq = models.CharField(max_length=20, blank=False)  # 学期
     kh = models.ForeignKey(ClassTable, on_delete=models.CASCADE)  # 课号
     gh = models.ForeignKey(TeacherTable, on_delete=models.CASCADE)  # 工号
-    pscj = models.FloatField()  # 平时成绩
-    kscj = models.FloatField()  # 考试成绩
-    zpcj = models.FloatField()  # 总评成绩
+    pscj = models.FloatField(blank=True)  # 平时成绩
+    kscj = models.FloatField(blank=True)  # 考试成绩
+    zpcj = models.FloatField(blank=True)  # 总评成绩
