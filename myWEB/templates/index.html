@@ -45,7 +45,7 @@
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar" style="background:#69B2E6; min-height:800px; padding:1px 5px 0px 2px;">
         <br>
-
+        {% if status == 'student' %} <!-- 学生端 -->
         <ul class="nav nav-sidebar" style="background: #AFD2FC;">
           <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 学生信息 </font></p>
         </ul>
@@ -77,10 +77,40 @@
           <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 数据查询 </font></p>
         </ul>
         <ul class="nav nav-sidebar" style="background: #FFFFFF">
-          <li><a href="/index/kbcx/"><font size="4" style="color: #385090; padding:30px;"> 课表查询 </font></a></li>
+          <li><a href="/index/cjcx/"><font size="4" style="color: #385090; padding:30px;"> 成绩查询 </font></a></li>
           <li><a href="/index/kccx/"><font size="4" style="color: #385090; padding:30px;"> 课程查询 </font></a></li>
         </ul>
         <br>
+        {% elif status == 'teacher' %} <!-- 教师端 -->
+        <ul class="nav nav-sidebar" style="background: #AFD2FC;">
+          <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 教师信息 </font></p>
+        </ul>
+        <ul class="nav nav-sidebar" style="background: #FFFFFF">
+          <font size="4">
+            <p style="padding: 5px 5px; line-height:28px;">
+              工号：{{gh}}
+              <br>
+              姓名：{{xm}}
+              <br>
+              职称：{{xl}}
+              <br>
+              <font color="red"><b>完成后请点击 <a href="/logout_view" style="color:red">[安全退出]</a></b></font>
+            </p>
+          </font>
+        </ul>
+        <br>
+
+        <ul class="nav nav-sidebar" style="background: #AFD2FC">
+          <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 常用功能 </font></p>
+        </ul>
+        <ul class="nav nav-sidebar" style="background: #FFFFFF">
+          <li><a href="/index/kk/"><font size="4" style="color: #385090; padding:30px;"> 开设课程 </font></a></li>
+          <li><a href="/index/qxkk/"><font size="4" style="color: #385090; padding:30px;"> 取消开课 </font></a></li>
+          <li><a href="/index/fbcj/"><font size="4" style="color: #385090; padding:30px;"> 发布成绩 </font></a></li>
+        </ul>
+        <br>
+
+        {% endif %}
       </div>
     </div>
   </div>

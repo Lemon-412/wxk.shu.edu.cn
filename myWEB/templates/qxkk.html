@@ -5,11 +5,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title> 课程查询 </title>
+  <title> 取消开课 </title>
   <link href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}" rel="stylesheet">
   <style type="text/css">
     .form-control-inline {
-      width:190px;
+      width:200px;
       height:30px;
       display:inline;
     }
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="/index" style="padding: 25px 15px"> 首页 </a></li>
-            <li class="active"><a href="" style="padding: 25px 15px"> 课程查询 <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="" style="padding: 25px 15px"> 取消开课 <span class="sr-only">(current)</span></a></li>
           </ul>
           <p class="navbar-text navbar-right" style="padding: 10px 150px">
             <font color="red">2019-2020学年冬季学期</font> |
@@ -50,20 +50,19 @@
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar" style="background:#69B2E6; min-height:800px; padding:1px 5px 0px 2px;">
         <br>
-
         <ul class="nav nav-sidebar" style="background: #AFD2FC;">
-          <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 学生信息 </font></p>
+          <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 教师信息 </font></p>
         </ul>
         <ul class="nav nav-sidebar" style="background: #FFFFFF">
           <font size="4">
             <p style="padding: 5px 5px; line-height:28px;">
-              学号：{{xh}}
+              工号：{{gh}}
               <br>
               姓名：{{xm}}
               <br>
-              英语等级：{{yydj}}
+              职称：{{xl}}
               <br>
-              <font color="red"><b>完成选课后请点击 <a href="/logout_view" style="color:red">[安全退出]</a></b></font>
+              <font color="red"><b> 完成后请点击 <a href="/logout_view" style="color:red">[安全退出]</a></b></font>
             </p>
           </font>
         </ul>
@@ -73,43 +72,25 @@
           <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 常用功能 </font></p>
         </ul>
         <ul class="nav nav-sidebar" style="background: #FFFFFF">
-          <li><a href="/index/xk/"><font size="4" style="color: #385090; padding:30px;"> 选课 </font></a></li>
-          <li><a href="/index/tk/"><font size="4" style="color: #385090; padding:30px;"> 退课 </font></a></li>
-        </ul>
-        <br>
-
-        <ul class="nav nav-sidebar" style="background: #AFD2FC">
-          <p style="padding: 3px 0px 0px 0px;"><font size="4" style="color: #385090; padding:30px;"> 数据查询 </font></p>
-        </ul>
-        <ul class="nav nav-sidebar" style="background: #FFFFFF">
-          <li><a href="/index/cjcx/"><font size="4" style="color: #385090; padding:30px;"> 成绩查询 </font></a></li>
-          <li><a href="/index/kccx/"><font size="4" style="color: #385090; padding:30px;"> 课程查询 </font></a></li>
+          <li><a href="/index/kk/"><font size="4" style="color: #385090; padding:30px;"> 开设课程 </font></a></li>
+          <li><a href="/index/qxkk/"><font size="4" style="color: #385090; padding:30px;"> 取消开课 </font></a></li>
+          <li><a href="/index/fbcj/"><font size="4" style="color: #385090; padding:30px;"> 发布成绩 </font></a></li>
         </ul>
         <br>
 
       </div>
 
       <div class="col-sm-3 col-md-6" style="padding: 10px 30px;">
-        <b><font size="4"> 课程查询： </font></b>
+        <b><font size="4"> 取消开课： </font></b>
         <br><br>
-        <form method="POST" action="/index/kccx/">
+        <form method="POST" action="/index/qxkk/">
           {% csrf_token %}
           <div class="form-group">
-            学期：
-            <input type="text" name="xq" class="form-control form-control-inline" value={% if xq %}{{xq}}{% else %} 2019-2020学年冬季学期 {% endif%}>
             课程号：
-            <input type="text" name="kh" class="form-control form-control-inline" style="width:100px;"  value={{kh}}>
-            课程名称：
-            <input type="text" name="km" class="form-control form-control-inline" style="width:150px" value={{km}}>
+            <input type="text" name="kh" class="form-control form-control-inline" style="width:100px;">
           </div>
-          <div class="form-group">
-            工号：
-            <input type="text" name="gh" class="form-control form-control-inline" style="width:70px" value={{gh}}>
-            教师名称：
-            <input type="text" name="jsmc" class="form-control form-control-inline" style="width:100px" value={{jsmc}}>
-            上课时间：
-            <input type="text" name="sksj" class="form-control form-control-inline" style="width:150px" value={{sksj}}>
-          </div>
+          <font color="red"><b>{{result}}</b></font>
+          <br>
           <input type="submit" value="提交">
           <br>
         </form>
@@ -117,17 +98,14 @@
       </div>
 
       <div class="col-sm-3 col-md-6" style="padding: 10px 30px;">
-        <b><font size="4"> 查询结果： </font></b>
+        <b><font size="4"> 已开课程： </font></b>
         <table class="table">
           <thead>
             <tr>
                 <th> 课程号 </th>
                 <th> 课程名称 </th>
-                <th> 工号 </th>
-                <th> 教师名称 </th>
                 <th> 上课时间 </th>
-                <th> 学期 </th>
-                <!--<th> 选课 </th>-->
+                <th> 选课人数 </th>
             </tr>
           </thead>
           <tbody>
@@ -135,17 +113,13 @@
             <tr>
                 <td> {{kc.kh}} </td>
                 <td> {{kc.km}} </td>
-                <td> {{kc.gh}} </td>
-                <td> {{kc.jsmc}} </td>
                 <td> {{kc.sksj}} </td>
-                <td> {{kc.xq}} </td>
-                <!--<td><button type="submit"> 选课 </button></td>-->
+                <td> {{kc.xkrs}} </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
-
     </div>
   </div>
 

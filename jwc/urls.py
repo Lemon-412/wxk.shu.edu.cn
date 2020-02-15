@@ -18,18 +18,23 @@ from django.urls import path
 from myWEB import views
 
 urlpatterns = [
-    path('', views.home),
-    path('admin/', admin.site.urls),
-    path('calculate/', views.calculate),
-    path('calculate-history/', views.calculate_history),
+    path('', views.home),  # 首页
+    path('admin/', admin.site.urls),  # admin
 
-    path('login', views.login),
+    path('calculate/', views.calculate),  # 计算器界面
+    path('calculate-history/', views.calculate_history),  # 计算历史
+
     path('login_view/', views.login_view),  # 填写完信息后提交登陆验证
     path('logout_view/', views.logout_view),  # 退出登陆
 
-    path('index', views.index),
-    path('index/xk/', views.xk),
-    path('index/tk/', views.tk),
-    path('index/kbcx/', views.kbcx),
-    path('index/kccx/', views.kccx),
+    path('index', views.index),  # 教务系统首页
+
+    path('index/xk/', views.xk),  # 学生选课
+    path('index/tk/', views.tk),  # 学生退课
+    path('index/cjcx/', views.cjcx),  # 学生成绩查询
+    path('index/kccx/', views.kccx),  # 学生课程查询
+
+    path('index/kk/', views.kk),  # 教师开课
+    path('index/qxkk/', views.qxkk),  # 教师取消开课
+    path('index/fbcj/', views.fbcj),  # 教师发布成绩
 ]
